@@ -42,31 +42,24 @@ def check_guess(guess, secret):
 
     outcome examples: "Win", "Too High", "Too Low"
     """
-    # Return a single outcome string: "Win", "Too High", or "Too Low".
-    # Prefer numeric comparison when possible.
+    # Prefer numeric comparison when possible (handles ints and numeric strings).
     try:
-        g = int(guess)
-        s = int(secret)
+        g = float(guess)
+        s = float(secret)
         if g == s:
-            return "Win"
+            return "Win", "🎉 Correct!"
         if g > s:
-            return "Too High"
-        return "Too Low"
+            return "Too High", "📉 Go LOWER!"
+        return "Too Low", "📈 Go HIGHER!"
     except Exception:
-        # Fall back to string comparison / numeric float attempt
+        # Fall back to string comparison / lexicographic when numbers can't be parsed
         g_str = str(guess)
         s_str = str(secret)
         if g_str == s_str:
-            return "Win"
-        try:
-            if float(g_str) > float(s_str):
-                return "Too High"
-            return "Too Low"
-        except Exception:
-            # Last resort: lexicographic
-            if g_str > s_str:
-                return "Too High"
-            return "Too Low"
+            return "Win", "🎉 Correct!"
+        if g_str > s_str:
+            return "Too High", "📉 Go LOWER!"
+        return "Too Low", "📈 Go HIGHER!"
 
 
 def update_score(current_score: int, outcome: str, attempt_number: int):
