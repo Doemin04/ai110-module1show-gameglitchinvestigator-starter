@@ -31,8 +31,6 @@ Answer each question in 3 to 5 sentences. Be specific and honest about what actu
   and what it showed you about your code.
 - Did AI help you design or understand any tests? How?
 
-## 3. Debugging and testing your fixes
-
 * I decided a bug was genuinely fixed when I could play the game in the browser without encountering the previous errors (like the backwards hints or the broken restart button) and when all of my automated unit tests passed successfully in the terminal.
 * I ran `pytest tests/test_game_logic.py` which executed four tests, including the new `test_parse_guess_invalid_input` test. This test verified that passing a non-numeric string like "hello" to `parse_guess` correctly returns `False`, `None`, and an error message.
 * Yes, Copilot Agent helped me design the test for invalid inputs. I asked it to generate a test specifically targeting the `parse_guess` function, and it successfully wrote the assertions and imported the required module on its own.
@@ -43,6 +41,8 @@ Answer each question in 3 to 5 sentences. Be specific and honest about what actu
 
 - How would you explain Streamlit "reruns" and session state to a friend who has never used Streamlit?
 
+Streamlit is built around the concept of "reruns." Every time a user interacts with the app (like clicking the "Submit" button), Streamlit runs the entire Python script from top to bottom all over again. Because of this, it has "amnesia" between clicks. To explain it to a friend: `st.session_state` is like a memory box you have to explicitly put variables into (like the secret number or the score) so the app remembers them the next time it refreshes.
+
 ---
 
 ## 5. Looking ahead: your developer habits
@@ -51,3 +51,7 @@ Answer each question in 3 to 5 sentences. Be specific and honest about what actu
   - This could be a testing habit, a prompting strategy, or a way you used Git.
 - What is one thing you would do differently next time you work with AI on a coding task?
 - In one or two sentences, describe how this project changed the way you think about AI generated code.
+
+- **Habit to reuse:** I want to keep the habit of using a "Developer Debug Info" expander (or printing state variables to the terminal) when building UIs. Being able to literally see the `st.session_state.secret` change into a string in real-time made catching the bug much easier.
+- **Do differently next time:** Next time I work with AI, I won't assume its mathematical or logical operators are correct just because the code runs without syntax errors. I need to manually verify `>` vs `<` and other core logic gates.
+- **Changed thinking:** This project showed me that AI-generated code is like a rough draft written by a very fast, very confident junior developer who doesn't test their edge cases. It's a great starting point, but I have to be the senior reviewer who enforces the actual logic and state management.
