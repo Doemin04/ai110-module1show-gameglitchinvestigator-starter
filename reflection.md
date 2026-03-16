@@ -3,10 +3,10 @@
 Answer each question in 3 to 5 sentences. Be specific and honest about what actually happened while you worked. This is about your process, not trying to sound perfect.
 
 ## 1. What was broken when you started?
+## 1. What was broken when you started?
 
-- What did the game look like the first time you ran it?
-- List at least two concrete bugs you noticed at the start  
-  (for example: "the hints were backwards").
+- On first run the UI looked functional but behaved oddly: hints often told me to do the opposite of what I should, the New Game button didn't reliably let me play again, and attempts/counts were inconsistent.
+- Concrete bugs I observed: 1) The hint messages were reversed — when a guess was too high the UI said "Go HIGHER!" and vice versa. 2) The New Game button did not fully reset the game state (it reset the secret and attempts but did not reset `status`/`score`/`history`), so after winning or losing you could still be blocked from playing. 3) Attempts display and control are inconsistent (attempts are initialized to 1, New Game sets attempts to 0, and the UI can show one attempt left while the game is unplayable). 4) The secret is sometimes coerced to a string on alternating attempts which creates mixed-type comparisons and unpredictable behavior.
 
 ---
 
